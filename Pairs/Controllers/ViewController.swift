@@ -69,10 +69,18 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
       let faceUpCards = self.cards.indices.filter { self.cards[$0].isFaceUp && !self.cards[$0].isMatched }
       if faceUpCards.count == 2 {
         if self.cards[faceUpCards[0]].content == self.cards[faceUpCards[1]].content {
-          self.cards[faceUpCards[0]].isMatched = true
-          self.cards[faceUpCards[1]].isMatched = true
-          
-          self.checkForGameCompletion()
+          UIView.animate(withDuration: 0.5, animations: {
+            if let firstMatchedCell = collectionView.cellForItem(at: IndexPath(item: faceUpCards[0], section: 0)) as? CardCell {
+              firstMatchedCell.alpha = 0
+            }
+            if let secondMatchedCell = collectionView.cellForItem(at: IndexPath(item: faceUpCards[1], section: 0)) as? CardCell {
+              secondMatchedCell.alpha = 0
+            }
+          }, completion: { _ in
+            self.cards[faceUpCards[0]].isMatched = true
+            self.cards[faceUpCards[1]].isMatched = true
+            self.checkForGameCompletion()
+          })
         } else {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             for index in faceUpCards {
