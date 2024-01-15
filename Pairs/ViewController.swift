@@ -27,8 +27,14 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath)
+    
+    if cards[indexPath.row].isFaceUp {
+      //what to do if card is faced up
+    } else {
+      //when the card is faced down
+    }
+    
     cell.layer.cornerRadius = 20
-    cell.backgroundColor = .systemPurple
     return cell
   }
   
