@@ -29,18 +29,6 @@
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8jW-8T-nyn">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paris" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3RH-Lc-deX">
-                                            <rect key="frame" x="35" y="83.5" width="58.5" height="33.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="3RH-Lc-deX" firstAttribute="centerX" secondItem="8jW-8T-nyn" secondAttribute="centerX" id="fJZ-nW-Ghw"/>
-                                        <constraint firstItem="3RH-Lc-deX" firstAttribute="centerY" secondItem="8jW-8T-nyn" secondAttribute="centerY" id="fec-Mj-rBB"/>
-                                    </constraints>
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                             </collectionViewCell>
@@ -51,9 +39,6 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Pairs" id="54O-vZ-zjQ"/>
-                    <connections>
-                        <outlet property="cardLabel" destination="3RH-Lc-deX" id="fU4-tl-sD2"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cPw-Yp-pWY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

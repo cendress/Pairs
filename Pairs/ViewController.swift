@@ -8,25 +8,22 @@
 import UIKit
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-  @IBOutlet weak var cardLabel: UILabel!
   
   var capitalCities: [String: String] = ["Paris": "France", "London": "England", "Bangkok": "Thailand", "Beijing": "China", "Mexico City": "Mexico", "Geneva": "Switzerland", "Berlin": "Germany", "Tokyo": "Japan"]
-  
-  var isCardLabelHidden = true
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
   }
   
-  //MARK: - Collection view methods
+  // MARK: - Collection view methods
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return capitalCities.count
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 4
+    return 1
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,12 +36,12 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath) else { return }
     
-    UIView.transition(with: cell, duration: 0.5, options: .transitionFlipFromLeft) {
-      cell.contentView.backgroundColor = .systemGray
-    }
+    UIView.transition(with: cell, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+      cell.contentView.backgroundColor = cell.contentView.backgroundColor == .systemGray ? .systemPurple : .systemGray
+    })
   }
   
-  //MARK: - UICollectionViewDelegateFlowLayout methods
+  // MARK: - UICollectionViewDelegateFlowLayout methods
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 160, height: 260)
@@ -55,21 +52,11 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 60
+    return 20
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 60
-  }
-  
-  //MARK: - Other methods
-  
-  private func updateCardLabel() {
-    if isCardLabelHidden {
-      cardLabel.text = ""
-    } else {
-      cardLabel.text = capitalCities.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
-    }
+    return 20
   }
   
   //create cards
@@ -82,7 +69,5 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   //if two cards match remove them and update the score
   //if both cards don't match then flip them over again
-  
-  
 }
 
