@@ -35,6 +35,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+    
+    UIView.transition(with: cell, duration: 0.5, options: .transitionFlipFromLeft) {
+      cell.contentView.backgroundColor = .black
+    }
   }
   
   //MARK: - UICollectionViewDelegateFlowLayout method
