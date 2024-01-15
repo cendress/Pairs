@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+  var cards = [Card]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
