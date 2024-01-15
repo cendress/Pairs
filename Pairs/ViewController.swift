@@ -8,6 +8,7 @@
 import UIKit
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+  @IBOutlet weak var cardLabel: UILabel!
   
   var capitalCities: [String: String] = ["Paris": "France", "London": "England", "Bangkok": "Thailand", "Beijing": "China", "Mexico City": "Mexico", "Geneva": "Switzerland", "Berlin": "Germany", "Tokyo": "Japan"]
   
@@ -37,7 +38,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     guard let cell = collectionView.cellForItem(at: indexPath) else { return }
     
     UIView.transition(with: cell, duration: 0.5, options: .transitionFlipFromLeft) {
-      cell.contentView.backgroundColor = .black
+      cell.contentView.backgroundColor = .systemGray
     }
   }
   
