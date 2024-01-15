@@ -13,7 +13,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
-    initializeCards()
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restartGame))
   }
   
   // MARK: - Collection view methods
@@ -131,6 +132,11 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let ac = UIAlertController(title: "Congratulations!", message: "You won the game!", preferredStyle: .alert)
     ac.addAction(UIAlertAction(title: "OK", style: .default))
     present(ac, animated: true)
+  }
+  
+  @objc private func restartGame() {
+    initializeCards()
+    collectionView.reloadData()
   }
   
 }
