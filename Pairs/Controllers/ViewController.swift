@@ -13,6 +13,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
+    initializeCards()
   }
   
   // MARK: - Collection view methods
@@ -33,8 +34,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let card = cards[indexPath.row]
     
     if cards[indexPath.row].isFaceUp {
-      //what to do if card is faced up
+      cell.cardLabel.text = card.content
+      cell.backgroundColor = .systemGray
     } else {
+      cell.cardLabel.text = ""
       cell.backgroundColor = .systemPurple
     }
     
@@ -48,22 +51,40 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
       return
     }
     
-    cards[indexPath.row].isFaceUp.toggle()
+    let cell = collectionView.cellForItem(at: indexPath) as? CardCell
+    let card = cards[indexPath.row]
     
-    let faceUpCards = cards.indices.filter { cards[$0].isFaceUp && !cards[$0].isMatched }
-    if faceUpCards.count == 2 {
-      if cards[faceUpCards[0]].content == cards[faceUpCards[1]].content {
-        cards[faceUpCards[0]].isMatched = true
-        cards[faceUpCards[1]].isMatched = true
+    UIView.transition(with: cell!, duration: 0.3, options: [.transitionFlipFromLeft], animations: {
+      if card.isFaceUp {
+        cell?.cardLabel.text = ""
+        cell?.backgroundColor = .systemPurple
       } else {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-          self.cards[faceUpCards[0]].isFaceUp = false
-          self.cards[faceUpCards[1]].isFaceUp = false
-          self.collectionView.reloadItems(at: faceUpCards.map { IndexPath(item: $0, section: 0) })
+        cell?.cardLabel.text = card.content
+        cell?.backgroundColor = .systemGray
+      }
+    }, completion: { finished in
+      self.cards[indexPath.row].isFaceUp.toggle()
+      
+      let faceUpCards = self.cards.indices.filter { self.cards[$0].isFaceUp && !self.cards[$0].isMatched }
+      if faceUpCards.count == 2 {
+        if self.cards[faceUpCards[0]].content == self.cards[faceUpCards[1]].content {
+          self.cards[faceUpCards[0]].isMatched = true
+          self.cards[faceUpCards[1]].isMatched = true
+        } else {
+          DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            for index in faceUpCards {
+              self.cards[index].isFaceUp = false
+              if let cellToFlipBack = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CardCell {
+                UIView.transition(with: cellToFlipBack, duration: 0.3, options: [.transitionFlipFromRight], animations: {
+                  cellToFlipBack.cardLabel.text = ""
+                  cellToFlipBack.backgroundColor = .systemPurple
+                })
+              }
+            }
+          }
         }
       }
-    }
-    collectionView.reloadItems(at: [indexPath])
+    })
   }
   
   // MARK: - UICollectionViewDelegateFlowLayout methods
@@ -92,21 +113,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     for pair in pairs {
       let cardOne = Card(content: pair.0)
       let cardTwo = Card(content: pair.1)
-      cards.append(contentsOf: [cardOne, cardTwo]) //duplicate the cards if needed
+      cards.append(contentsOf: [cardOne, cardTwo, cardOne, cardTwo])
     }
     
     cards.shuffle()
   }
   
-  //create cards
-  //create a collection view containing the cards
-  //create an onTap method that determines whats done once the card is tapped
-  //only allow two cards to be flipped at a time for a new action is done
-  
-  //cards must come in pairs of two (dictionary)
-  //create a dictionary of pairing values that contain the same key or index?
-  
-  //if two cards match remove them and update the score
-  //if both cards don't match then flip them over again
 }
-
