@@ -12,7 +12,6 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
     
     initializeCards()
     
@@ -126,7 +125,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     for pair in pairs {
       let cardOne = Card(content: pair.0)
       let cardTwo = Card(content: pair.1)
-      cards.append(contentsOf: [cardOne, cardTwo, cardOne, cardTwo])
+      cards.append(contentsOf: [cardOne, cardTwo])
     }
     
     cards.shuffle()
