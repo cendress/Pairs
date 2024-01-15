@@ -31,7 +31,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     if cards[indexPath.row].isFaceUp {
       //what to do if card is faced up
     } else {
-      //when the card is faced down
+      cell.backgroundColor = .systemPurple
     }
     
     cell.layer.cornerRadius = 20
@@ -39,11 +39,27 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+    guard !cards[indexPath.row].isMatched,
+          cards.filter({ $0.isFaceUp && !$0.isMatched }).count < 2 else {
+      return
+    }
     
-    UIView.transition(with: cell, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-      cell.contentView.backgroundColor = cell.contentView.backgroundColor == .systemGray ? .systemPurple : .systemGray
-    })
+    cards[indexPath.row].isFaceUp.toggle()
+    
+    let faceUpCards = cards.indices.filter { cards[$0].isFaceUp && !cards[$0].isMatched }
+    if faceUpCards.count == 2 {
+      if cards[faceUpCards[0]].content == cards[faceUpCards[1]].content {
+        cards[faceUpCards[0]].isMatched = true
+        cards[faceUpCards[1]].isMatched = true
+      } else {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+          self.cards[faceUpCards[0]].isFaceUp = false
+          self.cards[faceUpCards[1]].isFaceUp = false
+          self.collectionView.reloadItems(at: faceUpCards.map { IndexPath(item: $0, section: 0) })
+        }
+      }
+    }
+    collectionView.reloadItems(at: [indexPath])
   }
   
   // MARK: - UICollectionViewDelegateFlowLayout methods
