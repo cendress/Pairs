@@ -14,11 +14,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     super.viewDidLoad()
     
     initializeCards()
-    
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restartGame))
   }
   
-  // MARK: - Collection view methods
+//MARK: - Collection view methods
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return cards.count
@@ -35,8 +34,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let card = cards[indexPath.row]
     
-    if cards[indexPath.row].isFaceUp {
-      cell.cardLabel.text = card.content
+    if card.isFaceUp {
+      cell.cardLabel.text = card.city
       cell.backgroundColor = .systemGray
     } else {
       cell.cardLabel.text = ""
@@ -61,30 +60,33 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         cell?.cardLabel.text = ""
         cell?.backgroundColor = .systemPurple
       } else {
-        cell?.cardLabel.text = card.content
+        cell?.cardLabel.text = card.city
         cell?.backgroundColor = .systemGray
       }
     }, completion: { finished in
       self.cards[indexPath.row].isFaceUp.toggle()
       
-      let faceUpCards = self.cards.indices.filter { self.cards[$0].isFaceUp && !self.cards[$0].isMatched }
-      if faceUpCards.count == 2 {
-        if self.cards[faceUpCards[0]].content == self.cards[faceUpCards[1]].content {
+      let faceUpCardsIndices = self.cards.indices.filter { self.cards[$0].isFaceUp && !self.cards[$0].isMatched }
+      if faceUpCardsIndices.count == 2 {
+        let firstCard = self.cards[faceUpCardsIndices[0]]
+        let secondCard = self.cards[faceUpCardsIndices[1]]
+        
+        if firstCard.matches(with: secondCard) {
           UIView.animate(withDuration: 0.5, animations: {
-            if let firstMatchedCell = collectionView.cellForItem(at: IndexPath(item: faceUpCards[0], section: 0)) as? CardCell {
-              firstMatchedCell.alpha = 0
-            }
-            if let secondMatchedCell = collectionView.cellForItem(at: IndexPath(item: faceUpCards[1], section: 0)) as? CardCell {
-              secondMatchedCell.alpha = 0
+            faceUpCardsIndices.forEach { index in
+              if let cell = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
+                cell.alpha = 0
+              }
             }
           }, completion: { _ in
-            self.cards[faceUpCards[0]].isMatched = true
-            self.cards[faceUpCards[1]].isMatched = true
+            faceUpCardsIndices.forEach { index in
+              self.cards[index].isMatched = true
+            }
             self.checkForGameCompletion()
           })
         } else {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            for index in faceUpCards {
+            faceUpCardsIndices.forEach { index in
               self.cards[index].isFaceUp = false
               if let cellToFlipBack = collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CardCell {
                 UIView.transition(with: cellToFlipBack, duration: 0.3, options: [.transitionFlipFromRight], animations: {
@@ -99,7 +101,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     })
   }
   
-  // MARK: - UICollectionViewDelegateFlowLayout methods
+  //MARK: - UICollectionViewDelegateFlowLayout methods
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 160, height: 260)
@@ -123,9 +125,9 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let pairs = [("Paris", "France"), ("London", "England"), ("Bangkok", "Thailand"), ("Beijing", "China"), ("Mexico City", "Mexico"), ("Geneva", "Switzerland"), ("Berlin", "Germany"), ("Tokyo", "Japan")]
     
     for pair in pairs {
-      let cardOne = Card(content: pair.0)
-      let cardTwo = Card(content: pair.1)
-      cards.append(contentsOf: [cardOne, cardTwo, cardOne, cardTwo])
+      let cardOne = Card(city: pair.0, country: pair.1)
+      let cardTwo = Card(city: pair.1, country: pair.0)
+      cards.append(contentsOf: [cardOne, cardTwo])
     }
     
     cards.shuffle()
