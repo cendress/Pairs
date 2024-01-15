@@ -14,7 +14,7 @@
 		9DFCD4A52B5595B800E81B5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DFCD4A42B5595B800E81B5C /* Assets.xcassets */; };
 		9DFCD4A82B5595B800E81B5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DFCD4A62B5595B800E81B5C /* LaunchScreen.storyboard */; };
 		9DFCD4B02B55A8C000E81B5C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFCD4AF2B55A8C000E81B5C /* Card.swift */; };
-		9DFCD4B22B55ABE700E81B5C /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFCD4B12B55ABE700E81B5C /* CustomCollectionViewCell.swift */; };
+		9DFCD4B22B55ABE700E81B5C /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DFCD4B12B55ABE700E81B5C /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		9DFCD4A72B5595B800E81B5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DFCD4A92B5595B800E81B5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DFCD4AF2B55A8C000E81B5C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		9DFCD4B12B55ABE700E81B5C /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		9DFCD4B12B55ABE700E81B5C /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				9DFCD4A12B5595B600E81B5C /* Main.storyboard */,
-				9DFCD4B12B55ABE700E81B5C /* CustomCollectionViewCell.swift */,
+				9DFCD4B12B55ABE700E81B5C /* CardCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,7 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DFCD4A02B5595B600E81B5C /* ViewController.swift in Sources */,
-				9DFCD4B22B55ABE700E81B5C /* CustomCollectionViewCell.swift in Sources */,
+				9DFCD4B22B55ABE700E81B5C /* CardCell.swift in Sources */,
 				9DFCD49C2B5595B600E81B5C /* AppDelegate.swift in Sources */,
 				9DFCD49E2B5595B600E81B5C /* SceneDelegate.swift in Sources */,
 				9DFCD4B02B55A8C000E81B5C /* Card.swift in Sources */,
