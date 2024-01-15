@@ -34,7 +34,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //what happens when a card is tapped
+    guard let cell = collectionView.cellForItem(at: indexPath) else { return }
   }
   
   //MARK: - UICollectionViewDelegateFlowLayout method
