@@ -26,9 +26,11 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCell", for: indexPath) as? CardCell else {
       fatalError("Unable to dequeue CardCell")
     }
+    
+    let card = cards[indexPath.row]
     
     if cards[indexPath.row].isFaceUp {
       //what to do if card is faced up
