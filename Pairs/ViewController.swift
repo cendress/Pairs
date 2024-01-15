@@ -62,6 +62,14 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   private func initializeCards() {
     let pairs = [("Paris", "France"), ("London", "England"), ("Bangkok", "Thailand"), ("Beijing", "China"), ("Mexico City", "Mexico"), ("Geneva", "Switzerland"), ("Berlin", "Germany"), ("Tokyo", "Japan")]
+    
+    for pair in pairs {
+      let cardOne = Card(content: pair.0)
+      let cardTwo = Card(content: pair.1)
+      cards.append(contentsOf: [cardOne, cardTwo]) //duplicate the cards if needed
+    }
+    
+    cards.shuffle()
   }
   
   //create cards
