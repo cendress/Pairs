@@ -8,7 +8,12 @@
 import Foundation
 
 struct Card {
-  var content: String
-  var isMatched = false
-  var isFaceUp = false
+  var city: String
+  var country: String
+  var isFaceUp: Bool = false
+  var isMatched: Bool = false
+  
+  func matches(with otherCard: Card) -> Bool {
+    return (city == otherCard.country) || (country == otherCard.city)
+  }
 }

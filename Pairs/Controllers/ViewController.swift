@@ -125,7 +125,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     for pair in pairs {
       let cardOne = Card(content: pair.0)
       let cardTwo = Card(content: pair.1)
-      cards.append(contentsOf: [cardOne, cardTwo])
+      cards.append(contentsOf: [cardOne, cardTwo, cardOne, cardTwo])
     }
     
     cards.shuffle()
