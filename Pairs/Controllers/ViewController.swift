@@ -70,6 +70,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if self.cards[faceUpCards[0]].content == self.cards[faceUpCards[1]].content {
           self.cards[faceUpCards[0]].isMatched = true
           self.cards[faceUpCards[1]].isMatched = true
+          
+          checkForGameCompletion()
         } else {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             for index in faceUpCards {
@@ -117,6 +119,12 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     cards.shuffle()
+  }
+  
+  private func checkForGameCompletion() {
+    if cards.allSatisfy({ $0.isMatched }) {
+      showGameCompletionAlert()
+    }
   }
   
 }
