@@ -14,6 +14,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     super.viewDidLoad()
     collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
     
+    initializeCards()
+    
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(restartGame))
   }
   
