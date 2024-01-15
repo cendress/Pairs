@@ -42,7 +42,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
       cell.backgroundColor = .systemPurple
     }
     
-    cell.layer.cornerRadius = 20
+    configureCard(cell: cell)
     return cell
   }
   
@@ -139,4 +139,13 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     collectionView.reloadData()
   }
   
+  private func configureCard(cell: CardCell) {
+    cell.layer.cornerRadius = 20
+    cell.layer.borderWidth = 1
+    cell.layer.borderColor = UIColor.black.cgColor
+    cell.layer.shadowOpacity = 0.5
+    cell.layer.shadowRadius = 5
+    cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+    cell.layer.shadowColor = UIColor.black.cgColor
+  }
 }
