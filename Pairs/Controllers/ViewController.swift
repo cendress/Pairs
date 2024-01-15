@@ -71,7 +71,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
           self.cards[faceUpCards[0]].isMatched = true
           self.cards[faceUpCards[1]].isMatched = true
           
-          checkForGameCompletion()
+          self.checkForGameCompletion()
         } else {
           DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             for index in faceUpCards {
@@ -125,6 +125,12 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     if cards.allSatisfy({ $0.isMatched }) {
       showGameCompletionAlert()
     }
+  }
+  
+  private func showGameCompletionAlert() {
+    let ac = UIAlertController(title: "Congratulations!", message: "You won the game!", preferredStyle: .alert)
+    ac.addAction(UIAlertAction(title: "OK", style: .default))
+    present(ac, animated: true)
   }
   
 }
