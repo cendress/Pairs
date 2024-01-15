@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   
-  var capitalCities: [String: String] = ["Paris": "France", "London": "England", "Bangkok": "Thailand", "Beijing": "China", "Mexico City": "Mexico", "Geneva": "Switzerland", "Berlin": "Germany", "Tokyo": "Japan"]
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
