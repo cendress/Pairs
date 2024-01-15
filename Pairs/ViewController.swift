@@ -12,7 +12,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    collectionView.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellWithReuseIdentifier: <#T##String#>)
   }
   
   // MARK: - Collection view methods
