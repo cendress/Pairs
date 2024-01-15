@@ -12,15 +12,17 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   var capitalCities: [String: String] = ["Paris": "France", "London": "England", "Bangkok": "Thailand", "Beijing": "China", "Mexico City": "Mexico", "Geneva": "Switzerland", "Berlin": "Germany", "Tokyo": "Japan"]
   
+  var isCardLabelHidden = true
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
+    
   }
   
   //MARK: - Collection view methods
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return capitalCities.count / 2
+    return capitalCities.count
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -58,6 +60,16 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 60
+  }
+  
+  //MARK: - Other methods
+  
+  private func updateCardLabel() {
+    if isCardLabelHidden {
+      cardLabel.text = ""
+    } else {
+      cardLabel.text = capitalCities.map { "\($0.key): \($0.value)" }.joined(separator: ", ")
+    }
   }
   
   //create cards
