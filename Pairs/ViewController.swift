@@ -18,7 +18,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
   // MARK: - Collection view methods
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return capitalCities.count
+    return cards.count
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
