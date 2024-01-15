@@ -33,6 +33,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     return cell
   }
   
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //what happens when a card is tapped
+  }
+  
   //MARK: - UICollectionViewDelegateFlowLayout method
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
