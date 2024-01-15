@@ -58,6 +58,12 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     return 20
   }
   
+  //MARK: - Other methods
+  
+  private func initializeCards() {
+    let pairs = [("Paris", "France"), ("London", "England"), ("Bangkok", "Thailand"), ("Beijing", "China"), ("Mexico City", "Mexico"), ("Geneva", "Switzerland"), ("Berlin", "Germany"), ("Tokyo", "Japan")]
+  }
+  
   //create cards
   //create a collection view containing the cards
   //create an onTap method that determines whats done once the card is tapped
